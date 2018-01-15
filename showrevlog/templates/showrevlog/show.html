@@ -1,0 +1,57 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_urls static admin_list %}
+
+{% block extrastyle %}
+  {{ block.super }}
+  <link rel="stylesheet" type="text/css" href="{% static 'admin/css/changelists.css' %}" />
+  <style>
+    #changelist table thead th:first-child {width: inherit}
+  </style>
+{% endblock %}
+
+{% block extrahead %}
+{{ block.super }}
+{{ media.js }}
+{% endblock %}
+
+{% block bodyclass %}change-list{% endblock %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+<a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
+&rsaquo; <a href="{% url 'showrevlog:index' %}">{% trans "Log files" %}</a>
+&rsaquo; <a href="{% url 'showrevlog:show' fid %}">{{ fname }}</a>
+</div>
+{% endblock %}
+
+{% block coltype %}flex{% endblock %}
+
+{% block content %}
+<div id="content-main">
+  {% block result_list %}
+  <div class="results">
+    <table id="result_list" cellspacing="0">
+      <thead>
+        <tr>
+          {% for field in header %}
+            <th scope="col">{{ field }}</th>
+          {% endfor %}
+        </tr>
+      </thead>
+      <tbody>
+        {% for line in page.object_list  %}
+        <tr class="row1">
+          {% for fields in line %}
+            {% for field in fields %}
+              <td>{{ field }}</td>
+            {% endfor %}
+          {% endfor %}
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% endblock %}
+  {% block pagination %} {% pagination page %} {% endblock %}
+</div>
+{% endblock %}
