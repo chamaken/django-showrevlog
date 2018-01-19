@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-15 09:32+0000\n"
+"POT-Creation-Date: 2018-01-17 08:29+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,15 +18,23 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: showrevlog/models.py:31
+#: apps.py:7
+msgid "Show logfile in reverse order"
+msgstr "ログファイルを逆順表示"
+
+#: models.py:31
 msgid "Log file"
 msgstr "ログファイル"
 
-#: showrevlog/models.py:32 showrevlog/templates/showrevlog/files.html:22
-#: showrevlog/templates/showrevlog/show.html:22
+#: models.py:32 templates/showrevlog/files.html:22
+#: templates/showrevlog/show.html:22
 msgid "Log files"
 msgstr "ログファイル"
 
-#: showrevlog/models.py:98
+#: models.py:98
 msgid "(Exception?)"
 msgstr "(例外?)"
+
+#: templates/showrevlog/files.html:21 templates/showrevlog/show.html:21
+msgid "Home"
+msgstr "ホーム"
