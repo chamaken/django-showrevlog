@@ -11,7 +11,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-_FILEXP = re.compile(settings.SHOWREVLOG_FILEXP)
+_TARGET = getattr(settings, 'SHOWREVLOG_TARGET', lambda x: True)
 _LINEXP = re.compile(settings.SHOWREVLOG_LINEXP)
 COLNAMES = [t[0] for t in sorted(_LINEXP.groupindex.items(), key=lambda x: x[1])]
 
@@ -21,7 +21,7 @@ def logfiles(path=settings.SHOWREVLOG_DIR):
                    for _, _, files in os.walk(path)
                    for f in files
                    if os.access(os.path.join(path, f), os.R_OK) \
-                   and _FILEXP.search(f) is not None])
+                   and _TARGET(os.path.join(path, f))])
 
 
 class Logfile(models.Model):

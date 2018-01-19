@@ -177,4 +177,4 @@ SHOWREVLOG_LINEXP = ('(?P<date>\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2},\d{3})'
                      '\s\[(?P<source>[^:]+):(?P<line>[0-9]+)\]'
                      '\s(?P<process>[0-9]+)'
                      '\s(?P<message>.+)')
-SHOWREVLOG_FILEXP = '\.log'
+SHOWREVLOG_TARGET = lambda f: f.find('.log') and os.path.getsize(f) > 0
