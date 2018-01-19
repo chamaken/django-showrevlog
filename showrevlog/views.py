@@ -8,6 +8,7 @@ from django.http import HttpResponse
 from django.http import HttpResponseBadRequest
 from django.shortcuts import render
 from django.utils.safestring import mark_safe
+from django.utils.translation import ugettext_lazy as _
 
 from . import models
 
@@ -31,7 +32,12 @@ class PageForAdmin(object):
         self.page_num = page_num
         self.show_all = False
         self.can_show_all = False
-        self.multi_page = page.paginator.count > page_num
+        self.multi_page = page.paginator.count > page.paginator.per_page
+        self.result_count = page.paginator.count
+        self.opts = {
+            'verbose_name': _('Line'),
+            'verbose_name_plural': _('Lines'),
+        }
 
 
     def get_query_string(self, s):
