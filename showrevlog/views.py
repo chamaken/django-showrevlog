@@ -1,5 +1,6 @@
 import os, csv
 
+from django.contrib import admin
 from django.conf import settings
 from django.contrib.admin.views.main import PAGE_VAR
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -21,7 +22,11 @@ logger = logging.getLogger(__name__)
 def index(request, template_name):
     """Lists Log Files in settings directory"""
     files = [(str(i), s) for i, s in enumerate(models.logfiles())]
-    return render(request, template_name, {'files': files})
+    return render(request, template_name, {
+        'files': files,
+        'site_title': admin.site.site_title,
+        'site_header': admin.site.site_header,
+    })
 
 
 class PageForAdmin(object):
@@ -68,6 +73,8 @@ def show(request, logfile_id, template_name):
         'fname': fname,
         'fid': logfile_id,
         'page': PageForAdmin(page, page_num),
+        'site_title': admin.site.site_title,
+        'site_header': admin.site.site_header,
     }
     return render(request, template_name, context)
 
