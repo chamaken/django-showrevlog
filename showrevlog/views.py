@@ -1,13 +1,14 @@
 import os, csv
 
-from django.contrib import admin
 from django.conf import settings
+from django.contrib import admin
 from django.contrib.admin.views.main import PAGE_VAR
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core.paginator import Paginator
 from django.http import HttpResponse
 from django.http import HttpResponseBadRequest
 from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
 
@@ -17,7 +18,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-@login_required
+@login_required(login_url=reverse_lazy('admin:login'))
 @user_passes_test(lambda u: u.is_superuser)
 def index(request, template_name):
     """Lists Log Files in settings directory"""
@@ -54,7 +55,7 @@ class PageForAdmin(object):
         return getattr(self._page, attr)
 
 
-@login_required
+@login_required(login_url=reverse_lazy('admin:login'))
 @user_passes_test(lambda u: u.is_superuser)
 def show(request, logfile_id, template_name):
     try: page_num = int(request.GET.get(PAGE_VAR, '0'))
@@ -79,7 +80,7 @@ def show(request, logfile_id, template_name):
     return render(request, template_name, context)
 
 
-@login_required
+@login_required(login_url=reverse_lazy('admin:login'))
 @user_passes_test(lambda u: u.is_superuser)
 def as_csv(request, logfile_id):
     logfiles = models.logfiles()
