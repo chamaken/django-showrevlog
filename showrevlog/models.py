@@ -16,8 +16,9 @@ _LINEXP = re.compile(settings.SHOWREVLOG_LINEXP)
 COLNAMES = [t[0] for t in sorted(_LINEXP.groupindex.items(), key=lambda x: x[1])]
 
 
-def logfiles(path=settings.SHOWREVLOG_DIR):
-    return sorted([f
+def logfiles(paths=settings.SHOWREVLOG_DIRS):
+    return sorted([os.path.join(path, f)
+                   for path in paths
                    for _, _, files in os.walk(path)
                    for f in files
                    if os.access(os.path.join(path, f), os.R_OK) \

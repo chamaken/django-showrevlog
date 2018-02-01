@@ -35,7 +35,7 @@ Quick start
 2. Set UP 2 django variables in settings.py::
 
      # settings.py:
-     SHOWREVLOG_DIR = os.path.join(BASE_DIR, 'log')
+     SHOWREVLOG_DIRS = (os.path.join(BASE_DIR, 'log'),)
      SHOWREVLOG_LINEXP = ('(?P<date>\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2},\d{3})'
                           '\s(?P<type>[A-Z]+)'
                           '\s\[(?P<source>[^:]+):(?P<line>[0-9]+)\]'

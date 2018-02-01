@@ -66,7 +66,7 @@ def show(request, logfile_id, template_name):
     except Exception: return HttpResponseBadRequest()
 
     paginator = Paginator(
-        models.BackwardsLogfile(os.path.join(settings.SHOWREVLOG_DIR, fname)),
+        models.BackwardsLogfile(fname),
         settings.SHOWREVLOG_PER_PAGE)
     page = paginator.page(page_num + 1)
     context = {
@@ -91,7 +91,7 @@ def as_csv(request, logfile_id):
     response['Content-Disposition'] = 'attachment; filename=%s.csv' % fname
     writer = csv.writer(response)
     writer.writerow(models.COLNAMES)
-    with models.BackwardsLogfile(os.path.join(settings.SHOWREVLOG_DIR, fname)) as blf:
+    with models.BackwardsLogfile(fname) as blf:
         for l in blf:
             writer.writerow(*l)
 
